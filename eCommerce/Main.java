@@ -2,14 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
+        Scanner entrada = new Scanner(System.in, "UTF-8");
         int menu = 0;
 
         ArrayList<Produto> produtos = new ArrayList<>();
+        ArrayList<Carrinho> produtosCar = new ArrayList<>();
         
-        Produto maca = new Produto("Maçã", 2.99, 10);
-        Produto banana = new Produto("Banana", 3.99, 10);
-        Produto pera = new Produto("Pera", 4.99, 10);
+        Produto maca = new Produto("Maçã", 2.99, 100);
+        Produto banana = new Produto("Banana", 3.99, 100);
+        Produto pera = new Produto("Pera", 4.99, 100);
 
         Carrinho carrinho = new Carrinho("carrinho");
 
@@ -23,18 +24,21 @@ public class Main {
             switch (menu) {
                 case 1:
                     for(Produto p : produtos){
-                        System.out.printf("\n%d. Produto: %s ---- Preço: R$%s ---- Estoque: %s\n", p.nome, p.preco, p.estoque);
+                        System.out.printf("\nProduto: %s ---- Preço: R$%s ---- Estoque: %s\n", p.nome, p.preco, p.estoque);
                     }
                     break;
                 case 2:
-                    carrinho.adicionarProduto(produto);
+                    for(Produto p : produtos){
+                        System.out.println(p.nome);
+                    }
+                    carrinho.adicionarProduto(produtos, entrada, produtosCar);
                     break;
                 case 3:
-                    
+                    carrinho.mostrarCarrinho(produtosCar);
                     break;
                 case 4:
                     
-                
+                    carrinho.mostrarTotal(produtosCar);
                     
 
                     System.out.println("\nSaindo do programa...");
