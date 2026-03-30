@@ -9,4 +9,5 @@ public class Produto {
         this.preco = preco;
         this.estoque = estoque;
     }
+
 }

@@ -10,7 +10,7 @@ public class Carrinho {
         this.nome = nome;
     }
 
-    public void adicionarProduto(ArrayList<Produto> produtos, Scanner entrada, ArrayList<Carrinho> produtosCar){
+    public void adicionarProduto(ArrayList<Produto> produtos, Scanner entrada, ArrayList<Carrinho> produtosCarrinho){
         entrada.nextLine();
         System.out.println("\nEscolha o produto que deseja comprar\n");
         String escolha = entrada.nextLine().trim();
@@ -29,13 +29,26 @@ public class Carrinho {
         }
 
         System.out.println("\nEscolha a quantidade que deseja comprar\n");
-        Carrinho car = new Carrinho(escolha);
-        car.unid = entrada.nextInt();
-        if (car.unid > 0 && car.unid <= add.estoque){
-            add.estoque -= car.unid; 
-            car.preco = add.preco * car.unid;
-            produtosCar.add(car);
+        Carrinho existente = produtosCarrinho.stream().filter(c -> c.nome.trim().equalsIgnoreCase(escolha.trim())).findFirst().orElse(null);
+        int quantidade = entrada.nextInt();
+
+        if (quantidade > 0 && quantidade <= add.estoque) {
+
+            add.estoque -= quantidade;
+
+            if (existente != null) {
+                // Produto já está no carrinho → soma
+                existente.unid += quantidade;
+                existente.preco += add.preco * quantidade;
+            } else {
+                // Produto não existe → cria novo
+                Carrinho car = new Carrinho(escolha);
+                car.unid = quantidade;
+                car.preco = add.preco * quantidade;
+                produtosCarrinho.add(car);
+            }
         }
+
 
         
         

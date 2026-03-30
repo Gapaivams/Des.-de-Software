@@ -8,13 +8,13 @@ public class Main {
         ArrayList<Produto> produtos = new ArrayList<>();
         ArrayList<Carrinho> produtosCar = new ArrayList<>();
         
-        Produto maca = new Produto("Maçã", 2.99, 100);
+        Produto caqui = new Produto("Caqui", 2.99, 100);
         Produto banana = new Produto("Banana", 3.99, 100);
         Produto pera = new Produto("Pera", 4.99, 100);
 
         Carrinho carrinho = new Carrinho("carrinho");
 
-        produtos.add(maca);
+        produtos.add(caqui);
         produtos.add(banana);
         produtos.add(pera);
 
