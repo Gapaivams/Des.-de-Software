@@ -6,13 +6,13 @@ public class Main {
         int menu = 0;
 
         ArrayList<Produto> produtos = new ArrayList<>();
-        ArrayList<Carrinho> produtosCar = new ArrayList<>();
+        ArrayList<Carrinho> carrinho = new ArrayList<>();
         
         Produto caqui = new Produto("Caqui", 2.99, 100);
         Produto banana = new Produto("Banana", 3.99, 100);
         Produto pera = new Produto("Pera", 4.99, 100);
 
-        Carrinho carrinho = new Carrinho("carrinho");
+        Carrinho metodosCarrinho = new Carrinho("carrinho"); // Instancia do carrinho criada para utilizar os metodos da classe
 
         produtos.add(caqui);
         produtos.add(banana);
@@ -31,14 +31,15 @@ public class Main {
                     for(Produto p : produtos){
                         System.out.println(p.nome);
                     }
-                    carrinho.adicionarProduto(produtos, entrada, produtosCar);
+                    metodosCarrinho.adicionarProduto(produtos, entrada, carrinho);
+
                     break;
                 case 3:
-                    carrinho.mostrarCarrinho(produtosCar);
+                    metodosCarrinho.mostrarCarrinho(carrinho);
                     break;
                 case 4:
                     
-                    carrinho.mostrarTotal(produtosCar);
+                    metodosCarrinho.mostrarTotal(carrinho);
                     
 
                     System.out.println("\nSaindo do programa...");
