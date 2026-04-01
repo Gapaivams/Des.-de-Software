@@ -2,15 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Carrinho {
-    String nome;
+    ArrayList<Produto> produtosCarrinho = new ArrayList<>();
     double preco = 0;
-    int unid = 0;
 
-    public Carrinho(String nome){
-        this.nome = nome;
-    }
 
-    public void adicionarProduto(ArrayList<Produto> produtos, Scanner entrada, ArrayList<Carrinho> produtosCarrinho){
+    public void adicionarProduto(ArrayList<Produto> produtos, Scanner entrada){
         entrada.nextLine();
         System.out.println("\nEscolha o produto que deseja comprar\n");
         String escolha = entrada.nextLine().trim();
@@ -29,7 +25,7 @@ public class Carrinho {
         }
 
         System.out.println("\nEscolha a quantidade que deseja comprar\n");
-        Carrinho existente = produtosCarrinho.stream().filter(c -> c.nome.trim().equalsIgnoreCase(escolha.trim())).findFirst().orElse(null);
+        Produto existente = produtosCarrinho.stream().filter(c -> c.nome.trim().equalsIgnoreCase(escolha.trim())).findFirst().orElse(null);
         int quantidade = entrada.nextInt();
 
         if (quantidade > 0 && quantidade <= add.estoque) {
@@ -38,14 +34,14 @@ public class Carrinho {
 
             if (existente != null) {
                 // Produto já está no carrinho → soma
-                existente.unid += quantidade;
                 existente.preco += add.preco * quantidade;
             } else {
                 // Produto não existe → cria novo
-                Carrinho car = new Carrinho(escolha);
-                car.unid = quantidade;
-                car.preco = add.preco * quantidade;
-                produtosCarrinho.add(car);
+                Produto novo = new Produto(add.nome, add.preco * quantidade, quantidade);
+                
+                preco += add.preco * quantidade;
+                produtosCarrinho.add(novo);
+                
             }
         }
 
@@ -54,16 +50,16 @@ public class Carrinho {
         
     }
 
-    public void mostrarCarrinho(ArrayList<Carrinho> produtosCar){
-        for(Carrinho p : produtosCar){
+    public void mostrarCarrinho(){
+        for(Produto p : produtosCarrinho){
             System.out.printf("\nProduto: %s ---- Preço: R$%.2f\n", p.nome, p.preco);
         }
         
     }
 
-    public void mostrarTotal(ArrayList<Carrinho> produtosCar){
+    public void mostrarTotal(){
         double precoTotal = 0;
-        for(Carrinho c : produtosCar){
+        for(Produto c : produtosCarrinho){
             precoTotal += c.preco;
         }
         System.out.printf("\nValor total da compra = R$%.2f\n", precoTotal > 200 ? precoTotal - precoTotal*0.1 : precoTotal);

@@ -1,0 +1,9 @@
+public class ProdutoFisico extends Produto{
+    double peso;
+
+    public ProdutoFisico(String nome,double preco, double peso){
+        super(nome, preco);
+
+        this.peso = peso;
+    }
+}
